@@ -1,0 +1,4 @@
+<a href> {{ moosh.name | uppercase}} <span class="badge"> {{moosh.videos.length}}</span></a>
+<ul class="list-group" ng-show="selected == index && moosh.videos.length > 1">
+    <li class="list-group-item" ng-repeat="(key, video) in moosh.videos"><a href ng-click="updater({videoId:video})">#{{ key + 1}}</a></li>
+</ul>
