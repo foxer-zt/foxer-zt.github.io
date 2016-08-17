@@ -1,7 +1,7 @@
 angular.module('mooshApp', []).service('mooshProvider', ['$http', function ($http) {
     return {
         getAll: function() {
-            return $http.get('http://foxer-zt.github.io/moosh.json');
+            return $http.get('https://foxer-zt.github.io/moosh.json');
         }
     }
 }]);
