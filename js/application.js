@@ -4,4 +4,7 @@ angular.module('mooshApp', []).service('mooshProvider', ['$http', function ($htt
             return $http.get('https://foxer-zt.github.io/moosh.json');
         }
     }
+}]).config(['$routeProvider', function($routeProvider) {
+	$routeProvider.when('/moosh', {controller: 'menuCtrl'});
+	$routeProvider.when('/moosh:videoIndex', {controller: 'menuCtrl'});
 }]);

@@ -39,7 +39,7 @@
                     moosh="moosh"
                     updater="updateVideo(videoId)"
                     moosh-view
-                    ng-click="select($index)"
+                    ng-click="select($index); executeFirst(moosh)"
                     index="{{ $index }}"
                     selected="selected">
             </ul>
