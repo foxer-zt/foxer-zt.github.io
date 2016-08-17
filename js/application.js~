@@ -1,4 +1,4 @@
-angular.module('mooshApp', []).service('mooshProvider', ['$http', function ($http) {
+angular.module('mooshApp', ['ngRoute']).service('mooshProvider', ['$http', function ($http) {
     return {
         getAll: function() {
             return $http.get('https://foxer-zt.github.io/moosh.json');
@@ -6,4 +6,5 @@ angular.module('mooshApp', []).service('mooshProvider', ['$http', function ($htt
     }
 }]).config(['$routeProvider', function($routeProvider) {
 	$routeProvider.when('/play/:moosh/:videoIndex', {controller: 'menuCtrl'});
+	$locationProvider.html5Mode(true);
 }]);
