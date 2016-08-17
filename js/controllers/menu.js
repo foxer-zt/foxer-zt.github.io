@@ -1,5 +1,5 @@
 angular.module('mooshApp').controller('menuCtrl', ['$scope','mooshProvider', '$routeParams' , function ($scope, mooshProvider, $routeParams) {
-    var init = function(mooshs) {
+    var init = function(mooshs, player) {
     	if ($routeParams.moosh) {
 			for (var mooshIndex in mooshs) {
 				if(mooshs[mooshIndex].name == $routeParams.moosh) {
@@ -20,7 +20,7 @@ angular.module('mooshApp').controller('menuCtrl', ['$scope','mooshProvider', '$r
             $scope.selected = index;
         };
         $scope.selectedVideo = '';
-		init($scope.mooshs);
+		init($scope.mooshs, player);
         $scope.updateVideo = function(videoId) {
             $scope.selectedVideo = videoId;
             if(player) {
