@@ -1,17 +1,18 @@
 angular.module('mooshApp').controller('menuCtrl', ['$scope','mooshProvider', '$routeParams' , function ($scope, mooshProvider, $routeParams) {
     var init = function() {
-    if ($routeParams.moosh) {
-	for (var mooshIndex in mooshs) {
-		if(mooshs[mooshIndex].name == $routeParams.moosh) {
-			if ($routeParams.videoIndex) {
-				player.loadVideoById(mooshs[mooshIndex].videos[videoIndex]);
-			} else {
-				player.loadVideoById(mooshs[mooshIndex].videos[0])
-			}
-		}
-	} 
-	player.playVideo();
-    }
+    	if ($routeParams.moosh) {
+			for (var mooshIndex in mooshs) {
+				if(mooshs[mooshIndex].name == $routeParams.moosh) {
+					if ($routeParams.videoIndex) {
+						player.loadVideoById(mooshs[mooshIndex].videos[videoIndex]);
+					} else {
+						player.loadVideoById(mooshs[mooshIndex].videos[0])
+					}
+				}
+			} 
+		player.playVideo();
+    	}
+	}
     mooshProvider.getAll().then(function(response) {
         $scope.mooshs = response.data;
         $scope.selected = 0;
