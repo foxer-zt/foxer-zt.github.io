@@ -20,7 +20,7 @@ angular.module('mooshApp').controller('menuCtrl', ['$scope','mooshProvider', '$r
             $scope.selected = index;
         };
         $scope.selectedVideo = '';
-		init(scope.mooshs);
+		init($scope.mooshs);
         $scope.updateVideo = function(videoId) {
             $scope.selectedVideo = videoId;
             if(player) {
