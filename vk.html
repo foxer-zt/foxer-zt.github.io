@@ -27,8 +27,8 @@
         $.ajax({
           dataType: "jsonp",
           url: authorize ,
-          }).done(function ( data ) {
-            console.log(data);
+          }).done(function (data) {
+            console.log(JSON.parse(data));
         });
       }
       
