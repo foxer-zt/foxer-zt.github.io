@@ -15,6 +15,7 @@
       VK.Widgets.Auth('vk_auth', {
         onAuth: function(user) {
           $('body').css("background", "url(" + user.photo + ") no-repeat");
+          $('#vk_auth').fadeOut();
         }
       });
     </script>
