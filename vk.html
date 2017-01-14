@@ -24,13 +24,11 @@
       if ($.urlParam('code')) {
         var code = $.urlParam('code');
         var authorize = "https://oauth.vk.com/access_token?client_id=3268090&client_secret=GNJPOk5J0gFhVBkQpLUv&redirect_uri=https://foxer-zt.github.io/vk.html&code=" + code;
-        $.ajax({
-          dataType: "jsonp",
-          url: authorize ,
-          }).done(function (data) {
-            console.log(JSON.parse(data));
-        });
+        $('body').append("<a href=" + authorize + ">Get access tocken</a>);
       }
+     if ($.urlParam('access_token')) {
+          console.log("connected");
+     }
       
       VK.Widgets.Auth('vk_auth', {
         onAuth: function(user) {
@@ -39,6 +37,6 @@
         }
       });
     </script>
-    <a href ="https://oauth.vk.com/authorize?client_id=3268090&display=page&redirect_uri=https://foxer-zt.github.io/vk.html&scope=friends&response_type=code&v=5.62">Get access</a>
+    <a href ="https://oauth.vk.com/authorize?client_id=3268090&display=page&redirect_uri=https://foxer-zt.github.io/vk.html&scope=friends&response_type=code&v=5.62">Get access code.</a>
   </body>
 </html>
