@@ -12,6 +12,10 @@
   <body>
     <div id="vk_auth"></div>
     <script type="text/javascript">
+      function callbackFunc(result) {
+          console.log(result);
+        }
+      
       $.urlParam = function(name) {
         var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
         if (results == null) {
@@ -24,11 +28,10 @@
       if ($.urlParam('code')) {
         var code = $.urlParam('code');
         var authorize = "https://oauth.vk.com/access_token?client_id=3268090&client_secret=GNJPOk5J0gFhVBkQpLUv&redirect_uri=https://foxer-zt.github.io/vk.html&code=" + code;
-        $('body').append("<a href=" + authorize + ">Get access tocken</a>");
+        var script = document.createElement('SCRIPT');
+        script.src = authorize;
+        document.getElementsByTagName("head")[0].appendChild(script);
       }
-     if ($.urlParam('access_token')) {
-          console.log("connected");
-     }
       
       VK.Widgets.Auth('vk_auth', {
         onAuth: function(user) {
