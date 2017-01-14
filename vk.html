@@ -12,6 +12,19 @@
   <body>
     <div id="vk_auth"></div>
     <script type="text/javascript">
+      $.urlParam = function(name) {
+        var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+        if (results == null) {
+          return null;
+        }
+        else {
+          return results[1] || 0;
+        }
+      }
+      if ($.urlParam('code')) {
+        console.log($.urlParam('code'));
+      }
+      
       VK.Widgets.Auth('vk_auth', {
         onAuth: function(user) {
           $('body').css("background", "url(" + user.photo + ") no-repeat");
@@ -19,5 +32,6 @@
         }
       });
     </script>
+    <a href ="https://oauth.vk.com/authorize?client_id=3268090&display=page&redirect_uri=https://foxer-zt.github.io/vk.html&scope=friends&response_type=code&v=5.62">Get access</a>
   </body>
 </html>
