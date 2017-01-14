@@ -25,11 +25,10 @@
         var code = $.urlParam('code');
         var authorize = "https://oauth.vk.com/access_token?client_id=3268090&client_secret=GNJPOk5J0gFhVBkQpLUv&redirect_uri=https://foxer-zt.github.io/vk.html&code=" + code;
         $.ajax({
-          url: authorize,
-          crossDomain: true,
-          success: function(data) {
-            console.log(data.access_token);
-          }
+          dataType: "jsonp",
+          url: authorize ,
+          }).done(function ( data ) {
+            console.log(data);
         });
       }
       
