@@ -23,7 +23,7 @@
       }
       if ($.urlParam('code')) {
         var code = $.urlParam('code');
-        var authorize = "https://oauth.vk.com/access_token?client_id=3268090&client_secret=GNJPOk5J0gFhVBkQpLUv&redirect_uri=foxer-zt.github.io/vk.html&code=" + code;
+        var authorize = "https://oauth.vk.com/access_token?client_id=3268090&client_secret=GNJPOk5J0gFhVBkQpLUv&redirect_uri=https://foxer-zt.github.io/vk.html&code=" + code;
         $.ajax({
           url: authorize,
           dataType: 'jsonp',
@@ -41,6 +41,6 @@
         }
       });
     </script>
-    <a href ="https://oauth.vk.com/authorize?client_id=3268090&display=page&redirect_uri=foxer-zt.github.io/vk.html&scope=friends&response_type=code&v=5.62">Get access</a>
+    <a href ="https://oauth.vk.com/authorize?client_id=3268090&display=page&redirect_uri=https://foxer-zt.github.io/vk.html&scope=friends&response_type=code&v=5.62">Get access</a>
   </body>
 </html>
