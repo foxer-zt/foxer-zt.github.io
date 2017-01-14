@@ -23,15 +23,8 @@
       }
       if ($.urlParam('code')) {
         var code = $.urlParam('code');
-        var authorize = 'https://oauth.vk.com/access_token?client_id=3268090&client_secret=GNJPOk5J0gFhVBkQpLUv&redirect_uri=https://foxer-zt.github.io/vk.html&code=' + code;
-        
-        $.ajax({
-          url: authorize,
-          success: function(data){
-            console.log(data);
-          },
-          dataType: 'JSONP'
-        });
+        var authorize = "https://oauth.vk.com/access_token?client_id=3268090&client_secret=GNJPOk5J0gFhVBkQpLUv&redirect_uri=https://foxer-zt.github.io/vk.html&code=" + code;
+        $('body').append('<a href=' + authorize + '> Grab access token </a>');
       }
       
       VK.Widgets.Auth('vk_auth', {
