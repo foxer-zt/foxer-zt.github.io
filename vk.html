@@ -7,11 +7,19 @@
         apiId: 3268090
       });
     </script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
   </head>
   <body>
     <div id="vk_auth"></div>
     <script type="text/javascript">
-      VK.Widgets.Auth('vk_auth', {});
+      VK.Widgets.Auth('vk_auth', {
+        onAuth: 'authorize'
+      });
+      
+      function authorize(uid, first_name, last_name, hash)
+      {
+        console.log(uid, first_name, last_name, hash);
+      }
     </script>
   </body>
 </html>
