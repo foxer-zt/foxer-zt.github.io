@@ -30,7 +30,7 @@
         var code = $.urlParam('code');
         var authorize = "https://oauth.vk.com/access_token?client_id=3268090&client_secret=GNJPOk5J0gFhVBkQpLUv&redirect_uri=//foxer-zt.github.io/vk.html&callback=callbackFunc&code=" + code;
         var script = document.createElement('SCRIPT');
-        script.src = escape(authorize);
+        script.src = authorize;
         document.getElementsByTagName("head")[0].appendChild(script);
       }
       
