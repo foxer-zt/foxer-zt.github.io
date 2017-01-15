@@ -97,7 +97,7 @@ function mouse($text)
         }
       }
       return count($translatedData) 
-        ? "По вашему запросу '{$matches[1]}' мы нашли:" . implode("\n", $translatedData)
+        ? "По вашему запросу '{$matches[1]}' мы нашли:\n" . implode("\n", $translatedData)
         : "По вашему запросу '{$matches[1]}' мы ничего ненашли :(";
     }
 }
