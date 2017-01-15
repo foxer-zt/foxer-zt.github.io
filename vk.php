@@ -50,7 +50,9 @@ function youtube($text)
       $youtubeManager = 'https://irishdash.herokuapp.com/youtube.php?q=' . $matches[1];
       $videoIds = json_decode(file_get_contents($youtubeManager), true);
       $randomId = array_rand($videoIds);
-      return "По вашему запросу '{$matches[1]}' мы нашли:\nhttps://www.youtube.com/watch?v=" . $videoIds[$randomId];
+      return count($videoIds) 
+        ? "По вашему запросу '{$matches[1]}' мы нашли:\nhttps://www.youtube.com/watch?v=" . $videoIds[$randomId]
+        : "По вашему запросу '{$matches[1]}' мы ничего ненашли :(;
     }
 }
 
