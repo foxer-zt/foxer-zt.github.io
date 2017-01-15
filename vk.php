@@ -52,7 +52,7 @@ function youtube($text)
       $randomId = array_rand($videoIds);
       return count($videoIds) 
         ? "По вашему запросу '{$matches[1]}' мы нашли:\nhttps://www.youtube.com/watch?v=" . $videoIds[$randomId]
-        : "По вашему запросу '{$matches[1]}' мы ничего ненашли :(;
+        : "По вашему запросу '{$matches[1]}' мы ничего ненашли :(";
     }
 }
 
