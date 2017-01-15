@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Library Requirements
  *
@@ -11,9 +10,7 @@
 if (!file_exists(__DIR__ . '/vendor/autoload.php')) {
   throw new \Exception('please run "composer require google/apiclient:~2.0" in "' . __DIR__ .'"');
 }
-
 require_once __DIR__ . '/vendor/autoload.php';
-
 // $htmlBody = <<<END
 // <form method="GET">
 //   <div>
@@ -25,7 +22,6 @@ require_once __DIR__ . '/vendor/autoload.php';
 //   <input type="submit" value="Search">
 // </form>
 // END;
-
 // This code will execute if the user entered a search query in the form
 // and submitted the form. Otherwise, the page displays the form above.
 if (isset($_GET['q'])) {
@@ -35,23 +31,18 @@ if (isset($_GET['q'])) {
    * Please ensure that you have enabled the YouTube Data API for your project.
    */
   $DEVELOPER_KEY = 'AIzaSyC_g2t1D4kv_Jfyw49jLzsf95svq1M6vL8';
-
   $client = new Google_Client();
   $client->setDeveloperKey($DEVELOPER_KEY);
-
   // Define an object that will be used to make all API requests.
   $youtube = new Google_Service_YouTube($client);
-
   $htmlBody = '';
   try {
-    
     // Call the search.list method to retrieve results matching the specified
     // query term.
     $searchResponse = $youtube->search->listSearch('id,snippet', array(
       'q' => $_GET['q'],
       'maxResults' => 25,
     ));
-
     $videos = '';
     $channels = '';
     $playlists = '';
@@ -76,31 +67,9 @@ if (isset($_GET['q'])) {
           break;
       }
     }
+    
     echo json_encode($videoIds);
-
-//     $htmlBody .= <<<END
-//     <h3>Videos</h3>
-//     <ul>$videos</ul>
-//     <h3>Channels</h3>
-//     <ul>$channels</ul>
-//     <h3>Playlists</h3>
-//     <ul>$playlists</ul>
-// END;
-//   } catch (Google_Service_Exception $e) {
-//     $htmlBody .= sprintf('<p>A service error occurred: <code>%s</code></p>',
-//       htmlspecialchars($e->getMessage()));
-//   } catch (Google_Exception $e) {
-//     $htmlBody .= sprintf('<p>An client error occurred: <code>%s</code></p>',
-//       htmlspecialchars($e->getMessage()));
-//   }
-// }
-?>
-
-<!-- <!doctype html>
-<html>
-  <head>
-    <title>YouTube Search</title>
-  </head>
-  <body>
-  </body>
-</html> -->
+  } catch(Exception $e) {
+  	var_dump($e);
+  }
+}
