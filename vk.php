@@ -47,7 +47,7 @@ function youtube($text)
     if (!isset($matches[1]) ) {
       return "Введите запрос. Например: !youtube котики";
     } else {
-      $youtubeManager = 'https://irishdash.herokuapp.com/youtube.php?q=' . $matches[1];
+      $youtubeManager = 'https://irishdash.herokuapp.com/youtube.php?q=' . urlencode($matches[1]);
       $videoIds = json_decode(file_get_contents($youtubeManager), true);
       $randomId = array_rand($videoIds);
       return count($videoIds) 
