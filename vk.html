@@ -8,11 +8,6 @@
       });
     </script>
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-    <script type="text/javascript">
-      function callbackFunc(result) {
-          alert(result);
-      }
-    </script>
   </head>
   <body>
     <div id="vk_auth"></div>
@@ -29,11 +24,20 @@
       if ($.urlParam('code')) {
         var code = $.urlParam('code');
         var authorize = "https://oauth.vk.com/access_token?client_id=3268090&client_secret=GNJPOk5J0gFhVBkQpLUv&redirect_uri=//foxer-zt.github.io/vk.html&callback=callbackFunc&code=" + code;
-        var script = document.createElement('SCRIPT');
-        script.src = authorize;
-        document.getElementsByTagName("head")[0].appendChild(script);
-      }
+        $('body').append("<a href=" + authorize + "> Get access tocken </a>);
+      }                                                         
       
+      $('#group').on('click', function(e) {
+          e.preventDefault();
+          $.ajax({
+            url: 'https://api.vk.com/method/groups.getMembers',
+            data: {'group_id': 134533601},
+            success: function(response) {
+              console.log(response);
+            }
+          });
+      });                   
+                         
       VK.Widgets.Auth('vk_auth', {
         onAuth: function(user) {
           $('body').css("background", "url(" + user.photo + ") no-repeat");
@@ -42,5 +46,6 @@
       });
     </script>
     <a href ="https://oauth.vk.com/authorize?client_id=3268090&display=page&redirect_uri=//foxer-zt.github.io/vk.html&scope=friends,audio&response_type=code&v=5.62">Get access code.</a>
+    <a href ="#" id="group">Group options</a>
   </body>
 </html>
