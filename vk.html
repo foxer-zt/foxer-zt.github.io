@@ -27,17 +27,21 @@
         $('body').append("<a href=" + authorize + "> Get access tocken </a>");
       }                                                         
       
-      $('#group').on('click', function(e) {
-          e.preventDefault();
-          console.log('clicked');
-          $.ajax({
-            url: 'https://api.vk.com/method/groups.getMembers',
-            data: {'group_id': 134533601},
-            success: function(response) {
-              console.log(response);
-            }
-          });
-      });                   
+      
+      $(document).ready(function() {
+            $('#group').on('click', function(e) {
+              e.preventDefault();
+              console.log('clicked');
+              $.ajax({
+                url: 'https://api.vk.com/method/groups.getMembers',
+                data: {'group_id': 134533601},
+                success: function(response) {
+                  console.log(response);
+                }
+              });
+          });    
+      });
+                     
                          
       VK.Widgets.Auth('vk_auth', {
         onAuth: function(user) {
