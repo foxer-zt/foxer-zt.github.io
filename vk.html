@@ -31,10 +31,10 @@
       $(document).ready(function() {
             $('#group').on('click', function(e) {
               e.preventDefault();
-              console.log('clicked');
               $.ajax({
                 url: 'https://api.vk.com/method/groups.getMembers',
                 data: {'group_id': 134533601},
+                dataType: 'jsonp',
                 success: function(response) {
                   console.log(response);
                 }
