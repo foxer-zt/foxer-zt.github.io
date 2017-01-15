@@ -8,7 +8,8 @@ $token = '1042eda5d74788e33e9d30a26392b333669169050edd86f60181752309c1bba4577bc7
 $data = json_decode(file_get_contents('php://input')); 
 $commands = [
   '!cat' => 'cat',
-  '!youtube' => 'youtube'
+  '!youtube' => 'youtube',
+  '!mouse' => 'mouse'
 ];
 
 
@@ -62,4 +63,41 @@ function cat($text)
     $xml = simplexml_load_string(file_get_contents($catApiUrl), "SimpleXMLElement", LIBXML_NOCDATA);
     $response = json_decode(json_encode($xml), true);
     return "Держи котика, няша :3\n" . $response['data']['images']['image']['url'];
+}
+
+function mouse($text)
+{
+  preg_match('@!mouse\s(.*)@', $text, $matches);
+    $matches = array_filter($matches);
+    if (!isset($matches[1]) ) {
+      return "Введите запрос. Например: !mouse Irishdash";
+    } else {
+      $mapping = [
+        'name' => 'Имя',
+        'tribe' => 'Племя',
+        'title' => 'Титул',
+        'rounds' => 'Количество сыграных раундов',
+        'cheese' => 'Собрано сыра',
+        'sham_cheese' => 'Собрано сыра за шамана',
+        'saves' => 'Спасено мышей',
+        'hard_saves' => 'Спасено мышей в hard mode',
+        'first' => 'Количество собраных фестов',
+        'bootcamps' => 'Количество пройденных буткампов',
+        'cratio' => '% собранного сыра',
+        'sratio' => '% спасённых мышей',
+        'fratio' => '% фестов',
+        'rank' => 'Ранг',
+      ];
+      $mouseApi = 'http://api.formice.com/mouse/stats.json?n=' . $matches[1];
+      $mouseStats = json_decode(file_get_contents($mouseApi), true);
+      $translatedData = [];
+      foreach ($mouseStats as $field => $value) {
+        if (isset($mapping[$field])) {
+          $translatedData[] = "{$mapping[$field]}: $value";
+        }
+      }
+      return count($translatedData) 
+        ? "По вашему запросу '{$matches[1]}' мы нашли:" . implode("\n", $translatedData)
+        : "По вашему запросу '{$matches[1]}' мы ничего ненашли :(";
+    }
 }
