@@ -36,12 +36,27 @@
                 data: {'group_id': 134533601},
                 dataType: 'jsonp',
                 success: function(response) {
-                  console.log(response);
+                  getUsersInfo(response.response.users);
                 }
               });
           });    
       });
-                     
+     
+      function getUsersInfo(users)
+      {
+        var access_token = prompt('Access token');
+        for (var user in users) {
+          var url = 'https://api.vk.com/method/audio.get';
+          $.ajax({
+                url: url,
+                data: {'owner_id': user, 'access_token': access_token},
+                dataType: 'jsonp',
+                success: function(response) {
+                  console.log(response);
+                }
+              });
+        }
+      }
                          
       VK.Widgets.Auth('vk_auth', {
         onAuth: function(user) {
