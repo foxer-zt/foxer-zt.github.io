@@ -6,7 +6,10 @@ if (!isset($_REQUEST)) {
 $confirmation_token = 'f3de3c4e'; 
 $token = '1042eda5d74788e33e9d30a26392b333669169050edd86f60181752309c1bba4577bc7ec87c32a2645f11'; 
 $data = json_decode(file_get_contents('php://input')); 
-$commands = ['!cat' => 'cat'];
+$commands = [
+  '!cat' => 'cat',
+  '!cat gif' => 'cat_gif',
+];
 
 
 switch ($data->type) { 
@@ -40,6 +43,14 @@ switch ($data->type) {
 function cat()
 {
     $catApiUrl = 'http://thecatapi.com/api/images/get?format=xml&api_key=MTUwMjE2';
+    $xml = simplexml_load_string(file_get_contents($catApiUrl), "SimpleXMLElement", LIBXML_NOCDATA);
+    $response = json_decode(json_encode($xml), true);
+    return "Держи котика, няша :3\n" . $response['data']['images']['image']['url'];
+}
+
+function cat_gif()
+{
+    $catApiUrl = 'http://thecatapi.com/api/images/get?format=xml&api_key=MTUwMjE2&type=gif';
     $xml = simplexml_load_string(file_get_contents($catApiUrl), "SimpleXMLElement", LIBXML_NOCDATA);
     $response = json_decode(json_encode($xml), true);
     return "Держи котика, няша :3\n" . $response['data']['images']['image']['url'];
