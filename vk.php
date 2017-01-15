@@ -15,9 +15,13 @@ switch ($data->type) {
   case 'message_new': 
     $user_id = $data->object->user_id; 
     $user_info = json_decode(file_get_contents("https://api.vk.com/method/users.get?user_ids={$user_id}&v=5.0")); 
-    $user_name = $user_info->response[0]->first_name; 
+    $user_name = $user_info->response[0]->first_name;
+    $catApiUrl = 'http://thecatapi.com/api/images/get?format=xml';
+    $xml = simplexml_load_string(file_get_contents($catApiUrl), "SimpleXMLElement", LIBXML_NOCDATA);
+    $response = json_decode(json_encode($xml), true);
+    $catUrl = $response['data']['images']['image']['url'];
     $request_params = array( 
-      'message' => "Hello, {$user_name}!", 
+      'message' => "Привет, {$user_name}!\nМы обязательно тебе ответим, ну а пока держи котика :3\n$catUrl", 
       'user_id' => $user_id, 
       'access_token' => $token, 
       'v' => '5.0' 
