@@ -39,7 +39,7 @@ switch ($data->type) {
 
 function cat()
 {
-    $catApiUrl = 'http://thecatapi.com/api/images/get?format=xml';
+    $catApiUrl = 'http://thecatapi.com/api/images/get?format=xml&api_key=MTUwMjE2';
     $xml = simplexml_load_string(file_get_contents($catApiUrl), "SimpleXMLElement", LIBXML_NOCDATA);
     $response = json_decode(json_encode($xml), true);
     return "Держи котика, няша :3\n" . $response['data']['images']['image']['url'];
