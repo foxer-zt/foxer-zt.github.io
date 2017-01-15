@@ -49,7 +49,7 @@ if (isset($_GET['q'])) {
     // query term.
     $searchResponse = $youtube->search->listSearch('id,snippet', array(
       'q' => $_GET['q'],
-      'maxResults' => isset($_GET['maxResults']) ? $_GET['maxResults'] : 10,
+      'maxResults' => 25,
     ));
 
     $videos = '';
@@ -102,6 +102,5 @@ if (isset($_GET['q'])) {
     <title>YouTube Search</title>
   </head>
   <body>
-    <?=$htmlBody?>
   </body>
 </html> -->
