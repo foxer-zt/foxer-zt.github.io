@@ -29,6 +29,7 @@
       
       $('#group').on('click', function(e) {
           e.preventDefault();
+          console.log('clicked');
           $.ajax({
             url: 'https://api.vk.com/method/groups.getMembers',
             data: {'group_id': 134533601},
