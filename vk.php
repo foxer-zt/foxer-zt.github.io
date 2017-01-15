@@ -7,14 +7,8 @@ $confirmation_token = 'f3de3c4e';
 $token = '1042eda5d74788e33e9d30a26392b333669169050edd86f60181752309c1bba4577bc7ec87c32a2645f11'; 
 $data = json_decode(file_get_contents('php://input')); 
 $commands = [
-  '!cat' => [
-    'function' =>'cat',
-    'hint' => '!cat'
-  ],
-  '!youtube' => [
-    'function' => 'youtube',
-    'hint' => '!youtube поисковый_запрос'
-  ]
+  '!cat' => 'cat',
+  '!youtube' => 'youtube'
 ];
 
 
@@ -28,9 +22,9 @@ switch ($data->type) {
     $user_info = json_decode(file_get_contents("https://api.vk.com/method/users.get?user_ids={$user_id}&v=5.0")); 
     $user_name = $user_info->response[0]->first_name;
     $message = "Привет, $user_name!\n Да прибудет с тобой сила!\nСписок доступных комманд:\n" . implode(', ', array_keys($commands));
-    foreach($commands as $command => $data) {
-      if (strpos($data->object->body, $command) !== false && function_exists($data['function'])) {
-        $message = $data['function']($data->object->body);
+    foreach($commands as $command => $function) {
+      if (strpos($data->object->body, $command) !== false && function_exists($function)) {
+        $message = $function($data->object->body);
       }
     }
     $request_params = array( 
