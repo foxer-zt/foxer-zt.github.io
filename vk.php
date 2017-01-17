@@ -9,7 +9,8 @@ $data = json_decode(file_get_contents('php://input'));
 $commands = [
   '!cat' => 'cat',
   '!youtube' => 'youtube',
-  '!mouse' => 'mouse'
+  '!mouse' => 'mouse',
+  '!mooshTube' => 'mooshTube'
 ];
 
 
@@ -43,6 +44,16 @@ switch ($data->type) {
   echo('ok'); 
   break; 
 }
+
+function mooshTube($text)
+{
+  preg_match('@!mooshTube\s(.*)\s(.*?)\s(.*)@', $text, $matches);
+  $matches = array_filter($matches);
+  if (!isset($matches[1]) || !isset($matches[2]) || !isset($matches[3])) {
+    return "Введите запрос вида '!mooshTube add mouse_name video_id'\nНапример: !mooshTube add Irishdash H9HofYb_-kY";
+  }
+  $videoStorage = 'video';  
+ }
 
 function logUserAction($message, $logFile)
 {
