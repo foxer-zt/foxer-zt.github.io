@@ -46,7 +46,12 @@ switch ($data->type) {
 
 function logUserAction($message, $logFile)
 {
-  file_get_contents("https://irishdash-logger.herokuapp.com?method=log&logFile=$logFile&message=$message");
+  $params = [
+    'method' => 'log',
+    'logFile' => $logFile,
+    'message' => $message
+  ];
+  file_get_contents("https://irishdash-logger.herokuapp.com?" . http_build_query($params));
 }
 
 function youtube($text) 
