@@ -10,7 +10,7 @@ $commands = [
   '!cat' => 'cat',
   '!youtube' => 'youtube',
   '!mouse' => 'mouse',
-  '!mooshTube' => 'mooshTube'
+  //'!mooshTube' => 'mooshTube'
 ];
 
 
