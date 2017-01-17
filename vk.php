@@ -47,20 +47,20 @@ switch ($data->type) {
 
 function mooshTube($text)
 {
-  preg_match("@!mooshTube\s(.*)\s(.*?)\s(.*)@", $text, $matches);
-  if (!isset($matches[2]) || !isset($matches[3])) {
+  $commandStack = explode(' ', $text);
+  if (!isset($commandStack[2]) || !isset($commandStack[3])) {
     return "Введите запрос вида !mooshTube add mouse_name video_id\nНапример: !mooshTube add Irishdash H9HofYb_-kY";
   }
   $videoStorage = file_get_contents(getLog('video'));
   if (!json_decode($videoStorage)) {
-    $mooshName = strtolower($matches[2]);
-    $videoId = $matches[3];
+    $mooshName = strtolower($commandStack[2]);
+    $videoId = $commandStack[3];
     $data = [
       $mooshName => [$videoId]
     ];
   } else {
-    $mooshName = strtolower($matches[2]);
-    $videoId = $matches[3];
+    $mooshName = strtolower($commandStack[2]);
+    $videoId = $commandStack[3];
     $data = json_decode($videoStorage, true);
     if (isset($data[$mooshName])) {
       array_push($data[$mooshName], $videoId);
