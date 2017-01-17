@@ -76,13 +76,16 @@ function mooshTube($text)
   return "Видео $videoId добавленно.";
  }
 
-function logAction($message, $logFile)
+function logAction($message, $logFile, $useRewrite = false)
 {
   $params = [
     'method' => 'log',
     'logFile' => $logFile,
     'message' => $message
   ];
+  if ($useRewrite) {
+    $params['rewrite'] = true;
+  }
   file_get_contents("https://irishdash-logger.herokuapp.com?" . http_build_query($params));
 }
 
