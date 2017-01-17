@@ -25,7 +25,7 @@ switch ($data->type) {
     $userName = $user_info->response[0]->first_name;
     $lastName = $user_info->response[0]->last_name;
     $message = $data->object->body;
-    logUserAction("$userName $lastName: $message", 'UserActions');
+    logAction("$userName $lastName: $message", 'UserActions');
     $message = "Привет, $userName!\n Да прибудет с тобой сила!\nСписок доступных комманд:\n" . implode(', ', array_keys($commands));
     foreach($commands as $command => $function) {
       if (strpos($data->object->body, $command) !== false && function_exists($function)) {
@@ -52,15 +52,46 @@ function mooshTube($text)
   if (!isset($matches[1]) || !isset($matches[2]) || !isset($matches[3])) {
     return "Введите запрос вида '!mooshTube add mouse_name video_id'\nНапример: !mooshTube add Irishdash H9HofYb_-kY";
   }
-  $videoStorage = 'video';  
+  $videoStorage = file_get_contents(getLog('video'));
+  if (!json_decode($videoStorage)) {
+    $mooshName = strtolower($matches[2]);
+    $videoId = $matches[3];
+    $data = [
+      $mooshName => [$videoId]
+    ];
+  } else {
+    $mooshName = strtolower($matches[2]);
+    $videoId = $matches[3];
+    $data = json_decode($videoStorage, true);
+    if (isset($data[$mooshName])) {
+      array_push($data[$mooshName], $videoId);
+    } else {
+      $newEntry = [
+        $mooshName => [$videoId]
+      ];
+      $data = array_merge($data, $newEntry);
+    }
+  }
+  $json = json_encode($data);
+  logAction($json, 'video');
+  return "Видео $videoId добавленно.";
  }
 
-function logUserAction($message, $logFile)
+function logAction($message, $logFile)
 {
   $params = [
     'method' => 'log',
     'logFile' => $logFile,
     'message' => $message
+  ];
+  file_get_contents("https://irishdash-logger.herokuapp.com?" . http_build_query($params));
+}
+
+function getLog($logFile)
+{
+  $params = [
+    'method' => 'getLog',
+    'logFile' => $logFile
   ];
   file_get_contents("https://irishdash-logger.herokuapp.com?" . http_build_query($params));
 }
