@@ -72,7 +72,7 @@ function mooshTube($text)
     }
   }
   $json = json_encode($data);
-  logAction($json, 'video');
+  logAction($json, 'video', true);
   return "Видео $videoId добавленно.";
  }
 
