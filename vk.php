@@ -9,7 +9,8 @@ $data = json_decode(file_get_contents('php://input'));
 $commands = [
   '!cat' => 'cat',
   '!youtube' => 'youtube',
-  '!mouse' => 'mouse'
+  '!mouse' => 'mouse',
+  '!mooshTube' => 'mooshTube'
 ];
 
 
@@ -54,20 +55,29 @@ function logUserAction($message, $logFile)
   file_get_contents("https://irishdash-logger.herokuapp.com?" . http_build_query($params));
 }
 
+function mooshTube($text)
+{
+  preg_match('@!mooshTube\s(.*)\s(.*?)\s(.*)@', $text, $matches);
+    $matches = array_filter($matches);
+    if (!isset($matches[1] || !isset($matches[2] || !isset($matches[3]) ) {
+      return "Введите запрос вида '!mooshTube add mouse_name video_id'\n где, mouse_name - имя вашей мышки, а video_id - код видео на Youtube\nНапример: !mooshTube add Irishdash H9HofYb_-kY";
+    }  
+}
+
 function youtube($text) 
 {
     preg_match('@!youtube\s(.*)@', $text, $matches);
     $matches = array_filter($matches);
     if (!isset($matches[1]) ) {
       return "Введите запрос. Например: !youtube котики";
-    } else {
-      $youtubeManager = 'https://irishdash.herokuapp.com/youtube.php?q=' . urlencode($matches[1]);
-      $videoIds = json_decode(file_get_contents($youtubeManager), true);
-      $randomId = array_rand($videoIds);
-      return count($videoIds) 
-        ? "По вашему запросу '{$matches[1]}' мы нашли:\nhttps://www.youtube.com/watch?v=" . $videoIds[$randomId]
-        : "По вашему запросу '{$matches[1]}' мы ничего ненашли :(";
     }
+  
+    $youtubeManager = 'https://irishdash.herokuapp.com/youtube.php?q=' . urlencode($matches[1]);
+    $videoIds = json_decode(file_get_contents($youtubeManager), true);
+    $randomId = array_rand($videoIds);
+    return count($videoIds) 
+      ? "По вашему запросу '{$matches[1]}' мы нашли:\nhttps://www.youtube.com/watch?v=" . $videoIds[$randomId]
+      : "По вашему запросу '{$matches[1]}' мы ничего ненашли :(";
 }
 
 function cat($text)
