@@ -49,7 +49,7 @@ function mooshTube($text)
 {
   preg_match('@!mooshTube\s(.*)\s(.*?)\s(.*)@', $text, $matches);
   if (!isset($matches[2]) || !isset($matches[3])) {
-    return print_r($matches, true);
+    return $text;
     //return "Введите запрос вида !mooshTube add mouse_name video_id\nНапример: !mooshTube add Irishdash H9HofYb_-kY";
   }
   $videoStorage = file_get_contents(getLog('video'));
