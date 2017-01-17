@@ -48,7 +48,6 @@ switch ($data->type) {
 function mooshTube($text)
 {
   preg_match('@!mooshTube\s(.*)\s(.*?)\s(.*)@', $text, $matches);
-  $matches = array_filter($matches);
   if (!isset($matches[2]) || !isset($matches[3])) {
     return print_r($matches, true);
     //return "Введите запрос вида !mooshTube add mouse_name video_id\nНапример: !mooshTube add Irishdash H9HofYb_-kY";
