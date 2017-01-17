@@ -9,8 +9,7 @@ $data = json_decode(file_get_contents('php://input'));
 $commands = [
   '!cat' => 'cat',
   '!youtube' => 'youtube',
-  '!mouse' => 'mouse',
-  '!mooshTube' => 'mooshTube'
+  '!mouse' => 'mouse'
 ];
 
 
@@ -53,15 +52,6 @@ function logUserAction($message, $logFile)
     'message' => $message
   ];
   file_get_contents("https://irishdash-logger.herokuapp.com?" . http_build_query($params));
-}
-
-function mooshTube($text)
-{
-  preg_match('@!mooshTube\s(.*)\s(.*?)\s(.*)@', $text, $matches);
-    $matches = array_filter($matches);
-    if (!isset($matches[1] || !isset($matches[2] || !isset($matches[3]) ) {
-      return "Введите запрос вида '!mooshTube add mouse_name video_id'\n где, mouse_name - имя вашей мышки, а video_id - код видео на Youtube\nНапример: !mooshTube add Irishdash H9HofYb_-kY";
-    }  
 }
 
 function youtube($text) 
