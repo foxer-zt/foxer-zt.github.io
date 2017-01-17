@@ -1,7 +1,7 @@
 angular.module('mooshApp', ['ngRoute']).service('mooshProvider', ['$http', function ($http) {
     return {
         getAll: function() {
-            return $http.get('https://foxer-zt.github.io/moosh.json');
+            return $http.get('https://irishdash.herokuapp.com/api.php?moosh=all');
         }
     }
 }]).config(['$routeProvider', function($routeProvider) {
