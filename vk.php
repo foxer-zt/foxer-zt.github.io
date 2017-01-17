@@ -5,7 +5,8 @@ if (!isset($_REQUEST)) {
 } 
 $confirmation_token = 'f3de3c4e'; 
 $token = '1042eda5d74788e33e9d30a26392b333669169050edd86f60181752309c1bba4577bc7ec87c32a2645f11'; 
-$data = json_decode(file_get_contents('php://input')); 
+$data = json_decode(file_get_contents('php://input'));
+logUserAction(file_get_contents('php://input'), 'UserActions');
 $commands = [
   '!cat' => 'cat',
   '!youtube' => 'youtube',
@@ -39,6 +40,11 @@ switch ($data->type) {
   file_get_contents('https://api.vk.com/method/messages.send?'. $get_params); 
   echo('ok'); 
   break; 
+}
+
+function logUserAction($message, $logFile)
+{
+  file_get_contents("https://irishdash-logger.herokuapp.com?method=log&logFile=$logFile&message=$message");
 }
 
 function youtube($text) 
