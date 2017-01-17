@@ -49,7 +49,8 @@ function mooshTube($text)
 {
   $commandStack = explode(' ', $text);
   if (!isset($commandStack[2]) || !isset($commandStack[3])) {
-    return "Введите запрос вида !mooshTube add mouse_name video_id\nНапример: !mooshTube add Irishdash H9HofYb_-kY";
+    return print_r($commandStack, true);
+    //return "Введите запрос вида !mooshTube add mouse_name video_id\nНапример: !mooshTube add Irishdash H9HofYb_-kY";
   }
   $videoStorage = file_get_contents(getLog('video'));
   if (!json_decode($videoStorage)) {
