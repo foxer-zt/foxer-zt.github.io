@@ -10,7 +10,7 @@ $commands = [
   '!cat' => 'cat',
   '!youtube' => 'youtube',
   '!mouse' => 'mouse',
-  //'!mooshTube' => 'mooshTube'
+  '!mooshTube' => 'mooshTube'
 ];
 
 
@@ -63,7 +63,7 @@ function mooshTube($text)
     $videoId = $commandStack[3];
     $data = json_decode($videoStorage, true);
     if (isset($data[$mooshName])) {
-      array_push($data[$mooshName], $videoId);
+      $data[$mooshName] = array_merge($data[$mooshName], $videoId);
     } else {
       $newEntry = [
         $mooshName => [$videoId]
