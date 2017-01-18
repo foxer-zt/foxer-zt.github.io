@@ -54,9 +54,7 @@ function mooshTube($text)
   if (!json_decode($videoStorage)) {
     $mooshName = strtolower($commandStack[2]);
     $videoId = $commandStack[3];
-    $data = [
-      $mooshName => [$videoId];
-    ];
+    $data = [$mooshName => [$videoId];
   } else {
     $mooshName = strtolower($commandStack[2]);
     $videoId = $commandStack[3];
@@ -64,9 +62,7 @@ function mooshTube($text)
     if (isset($data[$mooshName])) {
       $data[$mooshName] = array_merge($data[$mooshName], $videoId);
     } else {
-      $newEntry = [
-        $mooshName => [$videoId]
-      ];
+      $newEntry = [$mooshName => [$videoId]];
       $data = array_merge($data, $newEntry);
     }
   }
