@@ -90,7 +90,7 @@ function getLog($logFile)
     'method' => 'getLog',
     'logFile' => $logFile
   ];
-  file_get_contents("https://irishdash-logger.herokuapp.com?" . http_build_query($params));
+  return file_get_contents("https://irishdash-logger.herokuapp.com?" . http_build_query($params));
 }
 
 function youtube($text) 
