@@ -9,8 +9,7 @@ $data = json_decode(file_get_contents('php://input'));
 $commands = [
   '!cat' => 'cat',
   '!youtube' => 'youtube',
-  '!mouse' => 'mouse',
-  //'!mooshTube' => 'mooshTube'
+  '!mouse' => 'mouse'
 ];
 
 
@@ -56,17 +55,17 @@ function mooshTube($text)
     $mooshName = strtolower($commandStack[2]);
     $videoId = $commandStack[3];
     $data = [
-      $mooshName .1 => [$videoId]
+      $mooshName => [$videoId];
     ];
   } else {
     $mooshName = strtolower($commandStack[2]);
     $videoId = $commandStack[3];
     $data = json_decode($videoStorage, true);
     if (isset($data[$mooshName])) {
-      $data[$mooshName.2] = array_merge($data[$mooshName], $videoId);
+      $data[$mooshName] = array_merge($data[$mooshName], $videoId);
     } else {
       $newEntry = [
-        $mooshName.3 => [$videoId]
+        $mooshName => [$videoId]
       ];
       $data = array_merge($data, $newEntry);
     }
