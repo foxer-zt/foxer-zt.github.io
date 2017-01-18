@@ -5,13 +5,14 @@ if (!isset($_REQUEST)) {
 } 
 $confirmation_token = $_ENV['confirmation_token']; 
 $token = $_ENV['token']; 
-$data = json_decode(file_get_contents('php://input'));
+$data = json_decode(file_get_contents('php://input'), true);
 $commands = [
   '!cat' => 'cat',
   '!youtube' => 'youtube',
   '!mouse' => 'mouse'
 ];
-
+$data1 = [$confirmation_token, $token, $data];
+die(print_r($data1, true));
 switch ($data->type) { 
   case 'confirmation': 
     echo $confirmation_token; 
