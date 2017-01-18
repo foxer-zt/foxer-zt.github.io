@@ -5,14 +5,12 @@ if (!isset($_REQUEST)) {
 } 
 $confirmation_token = $_ENV['confirmation_token']; 
 $token = $_ENV['token']; 
-$data = json_decode(file_get_contents('php://input'), true);
+$data = json_decode(file_get_contents('php://input'));
 $commands = [
   '!cat' => 'cat',
   '!youtube' => 'youtube',
   '!mouse' => 'mouse'
 ];
-$data1 = [$confirmation_token, $token, $data];
-die(print_r($data1, true));
 switch ($data->type) { 
   case 'confirmation': 
     echo $confirmation_token; 
@@ -32,7 +30,7 @@ switch ($data->type) {
     }
     $request_params = array( 
       'message' => $message,
-      'user_id' => $user_id, 
+      'user_id' => $userId, 
       'access_token' => $token, 
       'v' => '5.62' 
     ); 
@@ -42,6 +40,7 @@ switch ($data->type) {
   echo('ok'); 
   break; 
 }
+
 function youtube($text) 
 {
     preg_match('@!youtube\s(.*)@', $text, $matches);
