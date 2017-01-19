@@ -57,7 +57,7 @@ function mooshTube($text)
         'withoutDate' => true,
     ];
     file_get_contents('http://irishdash-logger.herokuapp.com/?' . http_build_query($data));
-    return "Видео {$splittedCommand[3]} для пользователя {$splittedCommand[2]} добавленно.";
+    return "Видео {$matches[3]} для пользователя {$matches[2]} добавленно.";
 }
 
 function youtube($text) 
