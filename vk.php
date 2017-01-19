@@ -46,7 +46,7 @@ function mooshTube($text)
 {
     preg_match('@!mooshTube\s(.*?)\s(.*)$@', $text, $matches);
     $matches = array_filter($matches);
-    if (!isset($matches[1] || !isset($matches[2])) {
+    if (!isset($matches[1]) || !isset($matches[2])) {
       return "Использование: !mooshTube ваш_никнейм код_видео_на_ютубе\nНапример !mooshTube Irishdash H9HofYb_-kY";
     }
 
