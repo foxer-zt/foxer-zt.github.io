@@ -44,14 +44,15 @@ switch ($data->type) {
 
 function mooshTube($text)
 {
-    $splittedCommand = array_filter(explode(' ', $text));
-    if (count($splittedCommand) < 3) {
+    preg_match('@!mooshTube\s(.*?)\s(.*)$@', $text, $matches);
+    $matches = array_filter($matches);
+    if (!isset($matches[1] || !isset($matches[2])) {
       return "Использование: !mooshTube ваш_никнейм код_видео_на_ютубе\nНапример !mooshTube Irishdash H9HofYb_-kY";
     }
 
     $data = [
         'method' => 'log',
-        'message' => "{$splittedCommand[2]}#%--%#{$splittedCommand[3]}",
+        'message' => "{$splittedCommand[1]}#%--%#{$matches[2]}",
         'logFile' => 'videos',
         'withoutDate' => true,
     ];
