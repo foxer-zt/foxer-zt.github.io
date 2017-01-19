@@ -12,6 +12,11 @@ $commands = [
   '!mouse' => 'mouse',
   '!mooshTube' => 'mooshTube',
 ];
+
+$helperCommands = [
+    '!mooshTube register' => 'register'
+];
+
 switch ($data->type) { 
   case 'confirmation': 
     echo $confirmation_token; 
@@ -29,6 +34,11 @@ switch ($data->type) {
         $message = $function($text);
       }
     }
+    foreach($helperCommands as $command => $function) {
+      if (strpos($data->object->body, $command) !== false && function_exists($function)) {
+        $message = $function($data);
+      }
+    }    
     $request_params = array( 
       'message' => $message,
       'user_id' => $userId, 
@@ -42,6 +52,43 @@ switch ($data->type) {
   break; 
 }
 
+function register($data)
+{
+    $text = $data->object->body;
+    preg_match('@!mooshTube register\s(.*)@', $text, $matches);
+    $matches = array_filter($matches);
+    if (!isset($matches[1]) ) {
+      return "Введите ваш никнейм. Например: !mooshTube register Irishdash";
+    }
+    $nickName = $matches[1];
+    $query = [
+        'method' => 'getLog',
+        'logFile' => 'mooshs',
+    ];
+    $mooshData = file_get_contents('http://irishdash-logger.herokuapp.com/?' . http_build_query($query));
+    if (strpos($mooshData, $nickName) !== false) {
+        $mooshList = array_filter(explode("\n", $mooshData));
+        foreach ($mooshList as $moosh) {
+            if (strpos($moosh, $nickName) !== false) {
+                $mooshId = explode('#%--%#', $moosh)[1];
+                $userInfo = json_decode(file_get_contents("https://api.vk.com/method/users.get?user_ids={$mooshId}&v=5.0")); 
+                $userName = $userInfo->response[0]->first_name;
+                $lastName = $userInfo->response[0]->last_name;
+                return "$nickName уже зарегестрирован пользователем $userName $lastName";
+            }
+        }
+    } else {
+        $mooshId = $data->object->user_id;
+        $data = [
+        'method' => 'log',
+        'message' => "$nickName#%--%#$mooshId",
+        'logFile' => 'mooshs'
+    ];
+    file_get_contents('http://irishdash-logger.herokuapp.com/?' . http_build_query($data));
+    return "Пользователь $nickName успешно зарегестрирован.";
+    }
+}
+
 function mooshTube($text)
 {
     preg_match('@!mooshTube\s(.*?)\s(.*)$@', $text, $matches);
@@ -49,7 +96,15 @@ function mooshTube($text)
     if (!isset($matches[1]) || !isset($matches[2])) {
       return "Использование: !mooshTube ваш_никнейм код_видео_на_ютубе\nНапример !mooshTube Irishdash H9HofYb_-kY";
     }
-
+    $query = [
+        'method' => 'getLog',
+        'logFile' => 'mooshs',
+    ];
+    $mooshData = file_get_contents('http://irishdash-logger.herokuapp.com/?' . http_build_query($query));
+    if (strpos($mooshData, $matches[1]) === false) {
+        return "Вы ещё не зарегестрированы! Введите !mooshTube register {$matches[1]} для регистрации.";
+    }
+    
     $data = [
         'method' => 'log',
         'message' => "{$matches[1]}#%--%#{$matches[2]}",
