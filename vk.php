@@ -52,7 +52,7 @@ function mooshTube($text)
 
     $data = [
         'method' => 'log',
-        'message' => "{$splittedCommand[1]}#%--%#{$matches[2]}",
+        'message' => "{$matches[1]}#%--%#{$matches[2]}",
         'logFile' => 'videos',
         'withoutDate' => true,
     ];
