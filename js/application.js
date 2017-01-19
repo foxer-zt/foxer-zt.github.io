@@ -1,7 +1,7 @@
 angular.module('mooshApp', ['ngRoute']).service('mooshProvider', ['$http', function ($http) {
     return {
         getAll: function() {
-            return $http.get('http://irishdash.herokuapp.com/api.php?combined');
+            return $http.get('https://irishdash.herokuapp.com/api.php?combined');
         }
     }
 }]).config(['$routeProvider', function($routeProvider) {
