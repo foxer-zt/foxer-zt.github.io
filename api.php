@@ -17,7 +17,9 @@ function mergeByName($newData)
     $existedData = json_decode(file_get_contents('https://irishdash.herokuapp.com/api.php?moosh=all'), true);
     $namesToUpdate = [];
     foreach ($newData as $item) {
-        $namesToUpdate[strtolower($item['name'])] = $item['videos'];
+        $namesToUpdate[strtolower($item['name'])] = count($namesToUpdate[$item['name']]) 
+            ? array_merge($namesToUpdate[$item['name']], $item['videos'])
+            : $item['videos'];
     }
     foreach ($existedData as &$item) {
         if (in_array($item['name'], array_keys($namesToUpdate))) {
