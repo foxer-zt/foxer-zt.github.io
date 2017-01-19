@@ -1,4 +1,5 @@
 <?php
+header('Access-Control-Allow-Origin: *');  
 $allowedRequests = ['moosh' => 'processMooshRequest', 'combined' => 'combineMoosh'];
 $intersection = array_intersect_key($allowedRequests, $_GET);
 if (count($intersection) === 0) {
