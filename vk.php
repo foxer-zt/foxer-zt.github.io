@@ -9,7 +9,8 @@ $data = json_decode(file_get_contents('php://input'));
 $commands = [
   '!cat' => 'cat',
   '!youtube' => 'youtube',
-  '!mouse' => 'mouse'
+  '!mouse' => 'mouse',
+  '!mooshTube' => 'mooshTube',
 ];
 switch ($data->type) { 
   case 'confirmation': 
@@ -39,6 +40,23 @@ switch ($data->type) {
   file_get_contents('https://api.vk.com/method/messages.send?'. $get_params); 
   echo('ok'); 
   break; 
+}
+
+function mooshTube($text)
+{
+    $splittedCommand = array_filter(explode(' ', $text));
+    if (count($splittedCommand) < 3) {
+      return "Использование: !mooshTube ваш_никнейм код_видео_на_ютубе\nНапример !mooshTube Irishdash H9HofYb_-kY";
+    }
+
+    $data = [
+        'method' => 'log',
+        'message' => "{$splittedCommand[2]}#%--%#{$splittedCommand[3]}",
+        'logFile' => 'videos',
+        'withoutDate' => true,
+    ];
+    file_get_contents('http://irishdash-logger.herokuapp.com/?' . http_build_query($data));
+    return "Видео {$splittedCommand[3]} для пользователя {$splittedCommand[2]} добавленно.";
 }
 
 function youtube($text) 
