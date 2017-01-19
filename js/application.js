@@ -6,4 +6,7 @@ angular.module('mooshApp', ['ngRoute']).service('mooshProvider', ['$http', funct
     }
 }]).config(['$routeProvider', function($routeProvider) {
 	$routeProvider.when('/play/:moosh/:videoIndex', {controller: 'menuCtrl'});
+}])
+.config(['$routeProvider', function($routeProvider) {
+	$routeProvider.when('/watch/:moosh/:videoIndex', {controller: 'watchCtrl'});
 }]);
