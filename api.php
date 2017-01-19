@@ -14,7 +14,7 @@ if (count($intersection) === 0) {
 function mergeByName($newData)
 {
     //$newData = [['name' => 'irishdash', 'videos' => [11111]]];
-    $existedData = json_decode(file_get_contents('http://irishdash.herokuapp.com/api.php?moosh=all'), true);
+    $existedData = json_decode(file_get_contents('https://irishdash.herokuapp.com/api.php?moosh=all'), true);
     $namesToUpdate = [];
     foreach ($newData as $item) {
         $namesToUpdate[strtolower($item['name'])] = $item['videos'];
