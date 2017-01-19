@@ -36,7 +36,14 @@ function mergeByName($newData)
 
 function combineMoosh($requestValue)
 {
-    return 'Coming soon';
+    $content = array_filter(explode("\n", file_get_contents('http://irishdash-logger.herokuapp.com/?method=getLog&logFile=videos')));
+    $data = [];
+    foreach ($content as $line) {
+        list($name, $videoId) = explode('#%--%#', $line);
+        $data[] = ['name' => strtolower(trim($name)), 'videos' => [trim($videoId)]];
+    }
+    
+    return json_encode(mergeByName($data));
 }
 
 function processMooshRequest($name)
