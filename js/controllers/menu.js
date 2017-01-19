@@ -4,7 +4,7 @@ angular.module('mooshApp').controller('menuCtrl', ['$scope','mooshProvider', '$r
 			for (var mooshIndex in mooshs) {
 				if(mooshs[mooshIndex].name == $routeParams.moosh) {
 					if ($routeParams.videoIndex) {
-						player.loadVideoById(mooshs[mooshIndex].videos[videoIndex]);
+						player.loadVideoById(mooshs[mooshIndex].videos[$routeParams.videoIndex]);
 					} else {
 						player.loadVideoById(mooshs[mooshIndex].videos[0])
 					}
