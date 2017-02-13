@@ -9,6 +9,6 @@ $photoIds = array_filter(explode(';', file_get_contents('https://poacher-knock-4
 foreach ($photoIds as &$id) {
   $id = "($id)";
 }
-$query ='INSERT INTO photoIds VALUES ' . implode(', ', $photoIds));
+$query ='INSERT INTO photoIds VALUES ' . implode(', ', $photoIds);
 $dbh->exec($query);
 echo "New record created successfully";
