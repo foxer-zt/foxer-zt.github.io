@@ -10,15 +10,15 @@ $password = $_ENV['DB_PASSWORD'];
 try {
   $dbh = new PDO("mysql:host=$host;dbname=$dbname", $user, $password); 
   $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  $dbh->prepare('SELECT * FROM :table ORDER BY RAND() LIMIT 1');
-  $dbh->bindParam(':table', $_GET['random'] . 's');
+  $dbh->prepare('SELECT * FROM ? ORDER BY RAND() LIMIT 1');
+  $dbh->execute(array($_GET['random'] . 's'));
+  $results = $sth->fetchAll(PDO::FETCH_ASSOC);
   var_dump($dbh->queryString);
-  $result = $dbh->execute();
-  foreach($result as $row) {
+  foreach($results as $row) {
     var_dump($row);
     var_dump($_GET['random']);
   }
-  echo $result[0][$_GET['random']];
+  echo $results[0][$_GET['random']];
   $dbh = null;
 } catch(PDOException $e){
     die($query . "<br>" . $e->getMessage());
