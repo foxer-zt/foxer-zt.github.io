@@ -15,7 +15,7 @@ try {
   $dbh->exec($query);
   echo "New record created successfully";
   
-} catch(PDOException $ex){
+} catch(PDOException $e){
     die($query . "<br>" . $e->getMessage(););
 }
 
