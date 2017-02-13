@@ -10,7 +10,7 @@ try {
   $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);             
   $photoIds = array_filter(explode('#', $quotes));
   foreach ($photoIds as &$id) {
-    $id = "($id)";
+    $id = "('$id')";
   }
   $query ='INSERT INTO quotes VALUES ' . implode(', ', $photoIds);
   $dbh->exec($query);
