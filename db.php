@@ -3,6 +3,7 @@ $host = $_ENV['DB_HOST'];
 $dbname = $_ENV['DB_NAME'];
 $user = $_ENV['DB_USER'];
 $password = $_ENV['DB_PASSWORD'];
+echo "mysql:host=host;dbname=dbname", $user, $pass;
 try {
   $dbh = new PDO("mysql:host=host;dbname=dbname", $user, $pass, 
                array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
