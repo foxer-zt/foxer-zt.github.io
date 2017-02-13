@@ -13,8 +13,10 @@ try {
   $dbh->prepare('SELECT * FROM :table ORDER BY RAND() LIMIT 1');
   $dbh->bindParam(':table', $_GET['random'] . 's');
   $result = $dbh->execute();
-  var_dump($result);
-  var_dump($_GET['random']);
+  foreach($result as $row) {
+    var_dump($row);
+    var_dump($_GET['random']);
+  }
   echo $result[0][$_GET['random']];
   $dbh = null;
 } catch(PDOException $e){
