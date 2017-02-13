@@ -1,6 +1,6 @@
 <?php
 $tables = ['quote', 'photoId'];
-if (!isset($_GET['random']) && !in_array($_GET['random'], $tables)) {
+if (!isset($_GET['random']) || !in_array($_GET['random'], $tables)) {
   die('Missed "random" key. Available values: ' . implode(', ', $tables));
 }
 $host = $_ENV['DB_HOST'];
@@ -12,7 +12,7 @@ try {
   $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   $dbh->prepare('SELECT * FROM ? ORDER BY RAND() LIMIT 1');
   $dbh->execute(array($_GET['random'] . 's'));
-  $results = $sth->fetchAll(PDO::FETCH_ASSOC);
+  $results = $dbh->fetchAll(PDO::FETCH_ASSOC);
   var_dump($dbh->queryString);
   foreach($results as $row) {
     var_dump($row);
