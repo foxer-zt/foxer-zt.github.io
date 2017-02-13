@@ -1,4 +1,3 @@
-<meta charset="windows-1252">
 <?php
 $tables = ['quote', 'photoId'];
 if (!isset($_GET['random']) && !in_array($_GET['random'], $tables)) {
