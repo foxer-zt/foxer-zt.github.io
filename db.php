@@ -5,7 +5,7 @@ $user = $_ENV['DB_USER'];
 $password = $_ENV['DB_PASSWORD'];
 
 try {
-  $dbh = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass); 
+  $dbh = new PDO("mysql:host=$host;dbname=$dbname", $user, $password); 
   $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);             
   $photoIds = array_filter(explode(';', file_get_contents('https://poacher-knock-48467.bitballoon.com/photoids.txt')));
   foreach ($photoIds as &$id) {
