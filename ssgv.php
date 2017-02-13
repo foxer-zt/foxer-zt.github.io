@@ -10,8 +10,7 @@ $password = $_ENV['DB_PASSWORD'];
 try {
   $dbh = new PDO("mysql:host=$host;dbname=$dbname", $user, $password); 
   $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  $dbh->prepare('SELECT * FROM ? ORDER BY RAND() LIMIT 1');
-  $dbh->execute(array($_GET['random'] . 's'));
+  $data = $dbh->query('SELECT * FROM photoIds ORDER BY RAND() LIMIT 1')->fetchAll(PDO::FETCH_ASSOC);
   $results = $dbh->fetchAll(PDO::FETCH_ASSOC);
   var_dump($dbh->queryString);
   foreach($results as $row) {
