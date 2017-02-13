@@ -16,7 +16,7 @@ try {
   echo "New record created successfully";
   
 } catch(PDOException $ex){
-    die(json_encode(array('outcome' => false, 'message' => 'Unable to connect')));
+    die($query . "<br>" . $e->getMessage(););
 }
 
 
