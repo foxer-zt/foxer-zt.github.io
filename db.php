@@ -16,7 +16,7 @@ try {
   echo "New record created successfully";
   
 } catch(PDOException $e){
-    die($query . "<br>" . $e->getMessage(););
+    die($query . "<br>" . $e->getMessage());
 }
 
 
