@@ -5,10 +5,11 @@ $user = $_ENV['DB_USER'];
 $password = $_ENV['DB_PASSWORD'];
 $dbh = new PDO("mysql:host=host;dbname=dbname", $user, $pass);
 
-$photoIds = array_filter(explode(';', file_get_contents('https://poacher-knock-48467.bitballoon.com/photoids.txt')));
-foreach ($photoIds as &$id) {
-  $id = "($id)";
-}
-$query ='INSERT INTO photoIds VALUES ' . implode(', ', $photoIds);
+//$photoIds = array_filter(explode(';', file_get_contents('https://poacher-knock-48467.bitballoon.com/photoids.txt')));
+//foreach ($photoIds as &$id) {
+//  $id = "($id)";
+//}
+//$query ='INSERT INTO photoIds VALUES ' . implode(', ', $photoIds);
+$query ='INSERT INTO photoIds VALUES (3), (4), (5), (6), (7), (23)';
 $dbh->exec($query);
 echo "New record created successfully";
