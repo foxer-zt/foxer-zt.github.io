@@ -36,8 +36,7 @@ $config['url'] = 'http://' . $_SERVER['HTTP_HOST'];
 $config['key'] = "some very-very long string without any non-latin characters due to different string representations inside of variable programming languages";
 
 $vopros = "Добрый день!";
-$whattosend = '["' . $session . '","' . urldecode($vopros) . '"]';
-$hashed = XORFUNC::XOR_encrypt(base64_encode($whattosend), $config['key']);
+$hashed = XORFUNC::XOR_encrypt(base64_encode($vopros), $config['key']);
 $myCurl = curl_init();
 curl_setopt_array($myCurl, array(
  CURLOPT_URL => 'http://iii.ru/api/2.0/json/Chat.request',
@@ -47,7 +46,7 @@ curl_setopt_array($myCurl, array(
 ));
 $response = curl_exec($myCurl);
 curl_close($myCurl);
-
+var_dump($response);
 //получаем ответ от бота на вопрос
 $answer = json_decode(base64_decode(XORFUNC::XOR_decrypt($response, $config['key'])));
 $otvet = $answer->result->text->value;
