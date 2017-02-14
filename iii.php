@@ -30,7 +30,7 @@ class XORFUNC
 }
 
 //настройки бота, нам понадобиться лишь один параметр - id бота, его можно узнать, просто наведя мышку на своего бота или чужого бота в сервисе.
-$config['botid'] = "e8ae75f7-d931-4300-974c-8fa5a69142d5";
+$config['botid'] = "a3c32fd5-e666-48a7-97fc-eb4630629760";
 //остальные настройки получаем автоматически
 $config['url'] = 'http://' . $_SERVER['HTTP_HOST'];
 $config['key'] = "some very-very long string without any non-latin characters due to different string representations inside of variable programming languages";
