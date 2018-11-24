@@ -159,6 +159,6 @@ if (!$update) {
 if (isset($update["message"])) {
   processMessage($update["message"]);
 } else {
-  processMessage('init');
+  var_dump(processMessage('Hello'));
 }
 
